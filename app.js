@@ -1,0 +1,13 @@
+const STORAGE_KEY='contacts-phase-1';
+const form=document.getElementById('contactForm');
+const list=document.getElementById('contactList');
+const emptyState=document.getElementById('emptyState');
+const message=document.getElementById('formMessage');
+const loader=document.getElementById('loader');
+let contacts=[];
+const icon=(gender)=>gender==='female'?'👩':'👨';
+const save=()=>localStorage.setItem(STORAGE_KEY,JSON.stringify(contacts));
+const render=()=>{list.innerHTML='';emptyState.hidden=contacts.length>0;contacts.forEach(c=>{const li=document.createElement('li');li.className='contact-list__item';li.innerHTML=`<span>${icon(c.gender)} ${c.name} ${c.lastname} - ${c.city}</span><span>${c.phone}</span>`;list.appendChild(li);});};
+const load=()=>{loader.classList.remove('loader--hidden');setTimeout(()=>{contacts=JSON.parse(localStorage.getItem(STORAGE_KEY))||[];render();loader.classList.add('loader--hidden');},400)};
+form.addEventListener('submit',e=>{e.preventDefault();const data=Object.fromEntries(new FormData(form));for(const key of ['name','lastname','phone','city','address','gender']){if(!String(data[key]||'').trim()){message.textContent='Todos los campos son obligatorios.';return;}}contacts.unshift({...data,name:data.name.trim(),lastname:data.lastname.trim(),phone:data.phone.trim(),city:data.city.trim(),address:data.address.trim()});save();render();form.reset();message.textContent='Contacto guardado.';});
+load();
