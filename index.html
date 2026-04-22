@@ -3,55 +3,114 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact List - Fase 2</title>
+  <meta name="description" content="Sistema CRUD de lista de contactos con DOM y LocalStorage" />
+  <title>Contact List - Fase 3</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="page">
   <main class="app">
-    <header class="app__hero hero">
-      <img class="hero__image" src="../assets/contact-hero.svg" alt="Ilustración de contactos" />
-      <h1 class="hero__title">Contact List</h1>
-      <p class="hero__subtitle">Fase 2 · CRUD con editar y eliminar</p>
+    <header class="app__hero hero" aria-labelledby="mainTitle">
+      <img class="hero__image" src="../assets/contact-hero.svg" alt="Ilustración principal de lista de contactos" />
+      <h1 class="hero__title" id="mainTitle">Contact List</h1>
     </header>
-    <section class="card">
+
+    <section class="app__section app__section--form" aria-labelledby="formTitle">
+      <h2 class="sr-only" id="formTitle">Formulario de contactos</h2>
+
       <form class="contact-form" id="contactForm" novalidate>
-        <input class="contact-form__input" type="text" name="name" placeholder="Input your name" />
-        <input class="contact-form__input" type="text" name="lastname" placeholder="Input your lastname" />
-        <input class="contact-form__input" type="tel" name="phone" placeholder="Input your phone" />
-        <input class="contact-form__input" type="text" name="city" placeholder="Input your city" />
-        <input class="contact-form__input" type="text" name="address" placeholder="Input your address" />
-        <div class="contact-form__gender">
-          <label><input type="radio" name="gender" value="female" /> Female</label>
-          <label><input type="radio" name="gender" value="male" /> Male</label>
-        </div>
-        <button class="contact-form__button" type="submit">ADD</button>
-        <p class="contact-form__message" id="formMessage"></p>
+        <label class="contact-form__field">
+          <span class="sr-only">Nombre</span>
+          <input class="contact-form__input" type="text" name="name" placeholder="Input your name" maxlength="40" />
+        </label>
+        <label class="contact-form__field">
+          <span class="sr-only">Apellido</span>
+          <input class="contact-form__input" type="text" name="lastname" placeholder="Input your lastname" maxlength="40" />
+        </label>
+        <label class="contact-form__field">
+          <span class="sr-only">Teléfono</span>
+          <input class="contact-form__input" type="tel" name="phone" placeholder="Input your phone" maxlength="20" inputmode="numeric" />
+        </label>
+        <label class="contact-form__field">
+          <span class="sr-only">Ciudad</span>
+          <input class="contact-form__input" type="text" name="city" placeholder="Input your city" maxlength="40" />
+        </label>
+        <label class="contact-form__field">
+          <span class="sr-only">Dirección</span>
+          <input class="contact-form__input" type="text" name="address" placeholder="Input your address" maxlength="80" />
+        </label>
+
+        <fieldset class="contact-form__gender">
+          <legend class="sr-only">Selecciona el género</legend>
+          <label class="contact-form__option">
+            <input class="contact-form__radio" type="radio" name="gender" value="female" />
+            <span class="contact-form__indicator"></span>
+            <span class="contact-form__option-label">Female</span>
+          </label>
+          <label class="contact-form__option">
+            <input class="contact-form__radio" type="radio" name="gender" value="male" />
+            <span class="contact-form__indicator"></span>
+            <span class="contact-form__option-label">Male</span>
+          </label>
+        </fieldset>
+
+        <button class="contact-form__button" id="submitButton" type="submit">ADD</button>
+        <p class="contact-form__feedback" id="formFeedback" aria-live="polite"></p>
       </form>
     </section>
-    <section class="card">
-      <div class="loader loader--hidden" id="loader">Cargando...</div>
+
+    <section class="app__section app__section--list" aria-labelledby="listTitle">
+      <div class="list-header">
+        <h2 class="sr-only" id="listTitle">Listado de contactos</h2>
+        <p class="list-header__meta" id="contactCounter">0 contactos</p>
+      </div>
+
+      <div class="loader loader--hidden" id="loader" role="status" aria-live="polite">
+        <span class="loader__spinner" aria-hidden="true"></span>
+        <span class="loader__text">Cargando contactos...</span>
+      </div>
+
       <ul class="contact-list" id="contactList"></ul>
-      <p class="empty-state" id="emptyState">No hay contactos guardados.</p>
+      <p class="empty-state" id="emptyState">No hay contactos guardados todavía.</p>
     </section>
   </main>
+
   <dialog class="modal" id="editModal">
-    <form class="contact-form" id="editForm">
-      <input class="contact-form__input" type="text" name="name" placeholder="Input your name" />
-      <input class="contact-form__input" type="text" name="lastname" placeholder="Input your lastname" />
-      <input class="contact-form__input" type="tel" name="phone" placeholder="Input your phone" />
-      <input class="contact-form__input" type="text" name="city" placeholder="Input your city" />
-      <input class="contact-form__input" type="text" name="address" placeholder="Input your address" />
-      <div class="contact-form__gender">
-        <label><input type="radio" name="gender" value="female" /> Female</label>
-        <label><input type="radio" name="gender" value="male" /> Male</label>
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title">Editar contacto</h2>
+        <button class="modal__close" id="closeEditModal" type="button" aria-label="Cerrar">×</button>
       </div>
-      <div class="modal__actions">
-        <button class="contact-form__button modal__button--ghost" type="button" id="cancelEdit">Cancelar</button>
-        <button class="contact-form__button" type="submit">Guardar</button>
-      </div>
-      <p class="contact-form__message" id="editMessage"></p>
-    </form>
+
+      <form class="contact-form contact-form--modal" id="editForm" novalidate>
+        <label class="contact-form__field"><span class="sr-only">Nombre</span><input class="contact-form__input" type="text" name="name" placeholder="Input your name" maxlength="40" /></label>
+        <label class="contact-form__field"><span class="sr-only">Apellido</span><input class="contact-form__input" type="text" name="lastname" placeholder="Input your lastname" maxlength="40" /></label>
+        <label class="contact-form__field"><span class="sr-only">Teléfono</span><input class="contact-form__input" type="tel" name="phone" placeholder="Input your phone" maxlength="20" inputmode="numeric" /></label>
+        <label class="contact-form__field"><span class="sr-only">Ciudad</span><input class="contact-form__input" type="text" name="city" placeholder="Input your city" maxlength="40" /></label>
+        <label class="contact-form__field"><span class="sr-only">Dirección</span><input class="contact-form__input" type="text" name="address" placeholder="Input your address" maxlength="80" /></label>
+
+        <fieldset class="contact-form__gender">
+          <legend class="sr-only">Selecciona el género</legend>
+          <label class="contact-form__option">
+            <input class="contact-form__radio" type="radio" name="gender" value="female" />
+            <span class="contact-form__indicator"></span>
+            <span class="contact-form__option-label">Female</span>
+          </label>
+          <label class="contact-form__option">
+            <input class="contact-form__radio" type="radio" name="gender" value="male" />
+            <span class="contact-form__indicator"></span>
+            <span class="contact-form__option-label">Male</span>
+          </label>
+        </fieldset>
+
+        <div class="modal__actions">
+          <button class="modal__button modal__button--secondary" id="cancelEditModal" type="button">Cancelar</button>
+          <button class="modal__button" type="submit">Guardar cambios</button>
+        </div>
+        <p class="contact-form__feedback" id="editFeedback" aria-live="polite"></p>
+      </form>
+    </div>
   </dialog>
+
   <script src="app.js"></script>
 </body>
 </html>
