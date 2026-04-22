@@ -9,6 +9,3 @@
 - Validación para evitar datos vacíos
 - Spinner / mensaje de carga
 - Responsive
-
-## Archivo recomendado para entregar
-Usa la carpeta `fase-3/`.

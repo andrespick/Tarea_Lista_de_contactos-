@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact List - Fase 1</title>
+  <title>Contact List - Fase 2</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="page">
@@ -11,9 +11,8 @@
     <header class="app__hero hero">
       <img class="hero__image" src="../assets/contact-hero.svg" alt="Ilustración de contactos" />
       <h1 class="hero__title">Contact List</h1>
-      <p class="hero__subtitle">Fase 1 · crear y listar con LocalStorage</p>
+      <p class="hero__subtitle">Fase 2 · CRUD con editar y eliminar</p>
     </header>
-
     <section class="card">
       <form class="contact-form" id="contactForm" novalidate>
         <input class="contact-form__input" type="text" name="name" placeholder="Input your name" />
@@ -29,13 +28,30 @@
         <p class="contact-form__message" id="formMessage"></p>
       </form>
     </section>
-
     <section class="card">
       <div class="loader loader--hidden" id="loader">Cargando...</div>
       <ul class="contact-list" id="contactList"></ul>
       <p class="empty-state" id="emptyState">No hay contactos guardados.</p>
     </section>
   </main>
+  <dialog class="modal" id="editModal">
+    <form class="contact-form" id="editForm">
+      <input class="contact-form__input" type="text" name="name" placeholder="Input your name" />
+      <input class="contact-form__input" type="text" name="lastname" placeholder="Input your lastname" />
+      <input class="contact-form__input" type="tel" name="phone" placeholder="Input your phone" />
+      <input class="contact-form__input" type="text" name="city" placeholder="Input your city" />
+      <input class="contact-form__input" type="text" name="address" placeholder="Input your address" />
+      <div class="contact-form__gender">
+        <label><input type="radio" name="gender" value="female" /> Female</label>
+        <label><input type="radio" name="gender" value="male" /> Male</label>
+      </div>
+      <div class="modal__actions">
+        <button class="contact-form__button modal__button--ghost" type="button" id="cancelEdit">Cancelar</button>
+        <button class="contact-form__button" type="submit">Guardar</button>
+      </div>
+      <p class="contact-form__message" id="editMessage"></p>
+    </form>
+  </dialog>
   <script src="app.js"></script>
 </body>
 </html>
