@@ -1,0 +1,34 @@
+{
+  "name": "contact-list-api",
+  "version": "1.0.0",
+  "description": "Lista de contactos con frontend vanilla, API Express y base de datos SQLite.",
+  "keywords": [
+    "contacts",
+    "express",
+    "sqlite"
+  ],
+  "homepage": "https://github.com/andrespick/Tarea_Lista_de_contactos-#readme",
+  "bugs": {
+    "url": "https://github.com/andrespick/Tarea_Lista_de_contactos-/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrespick/Tarea_Lista_de_contactos-.git"
+  },
+  "license": "ISC",
+  "author": "andres vela",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=22.5.0"
+  }
+}
