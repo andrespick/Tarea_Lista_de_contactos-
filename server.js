@@ -77,15 +77,15 @@ function normalizeContact(body) {
 
 function validateContact(contact) {
   if (Object.values(contact).some((value) => !value)) {
-    return 'All fields are required';
+    return 'Todos los campos son obligatorios';
   }
 
   if (!['male', 'female'].includes(contact.sex)) {
-    return 'Sex must be male or female';
+    return 'El sexo debe ser masculino o femenino';
   }
 
   if (!/^[0-9+\-\s()]{7,20}$/.test(contact.phone)) {
-    return 'Phone must contain 7 to 20 valid characters';
+    return 'El telefono debe contener entre 7 y 20 caracteres validos';
   }
 
   return '';
@@ -119,7 +119,7 @@ app.put('/api/contacts/:id', (req, res) => {
   const id = Number(req.params.id);
 
   if (!Number.isInteger(id)) {
-    return res.status(400).json({ error: 'Invalid contact id' });
+    return res.status(400).json({ error: 'Id de contacto invalido' });
   }
 
   const contact = normalizeContact(req.body);
@@ -140,7 +140,7 @@ app.put('/api/contacts/:id', (req, res) => {
   );
 
   if (result.changes === 0) {
-    return res.status(404).json({ error: 'Contact not found' });
+    return res.status(404).json({ error: 'Contacto no encontrado' });
   }
 
   return res.json(findContactById.get(id));
@@ -150,18 +150,18 @@ app.delete('/api/contacts/:id', (req, res) => {
   const id = Number(req.params.id);
 
   if (!Number.isInteger(id)) {
-    return res.status(400).json({ error: 'Invalid contact id' });
+    return res.status(400).json({ error: 'Id de contacto invalido' });
   }
 
   const result = deleteContact.run(id);
 
   if (result.changes === 0) {
-    return res.status(404).json({ error: 'Contact not found' });
+    return res.status(404).json({ error: 'Contacto no encontrado' });
   }
 
   return res.status(204).send();
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`Servidor ejecutandose en http://localhost:${PORT}`);
 });

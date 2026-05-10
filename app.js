@@ -129,7 +129,7 @@ async function loadContacts() {
 
 const resetMainForm = () => {
   form.reset();
-  submitButton.textContent = 'ADD';
+  submitButton.textContent = 'Agregar';
 };
 
 const openEditModal = (contactId) => {
@@ -181,7 +181,7 @@ form.addEventListener('submit', async (event) => {
     setFeedback(formFeedback, error.message, true);
   } finally {
     submitButton.disabled = false;
-    submitButton.textContent = 'ADD';
+    submitButton.textContent = 'Agregar';
   }
 });
 

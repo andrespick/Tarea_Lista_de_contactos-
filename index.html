@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Sistema CRUD de lista de contactos con API Express y SQLite" />
-  <title>Contact List - API</title>
+  <title>Lista de Contactos - API</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="page">
   <main class="app">
     <header class="app__hero hero" aria-labelledby="mainTitle">
       <img class="hero__image" src="./assets/contact-hero.svg" alt="Ilustracion principal de lista de contactos" />
-      <h1 class="hero__title" id="mainTitle">Contact List</h1>
+      <h1 class="hero__title" id="mainTitle">Lista de Contactos</h1>
     </header>
 
     <section class="app__section app__section--form" aria-labelledby="formTitle">
@@ -20,40 +20,40 @@
       <form class="contact-form" id="contactForm" novalidate>
         <label class="contact-form__field">
           <span class="sr-only">Nombre</span>
-          <input class="contact-form__input" type="text" name="name" placeholder="Input your name" maxlength="40" />
+          <input class="contact-form__input" type="text" name="name" placeholder="Ingresa tu nombre" maxlength="40" />
         </label>
         <label class="contact-form__field">
           <span class="sr-only">Apellido</span>
-          <input class="contact-form__input" type="text" name="lastname" placeholder="Input your lastname" maxlength="40" />
+          <input class="contact-form__input" type="text" name="lastname" placeholder="Ingresa tu apellido" maxlength="40" />
         </label>
         <label class="contact-form__field">
-          <span class="sr-only">Teléfono</span>
-          <input class="contact-form__input" type="tel" name="phone" placeholder="Input your phone" maxlength="20" inputmode="numeric" />
+          <span class="sr-only">Telefono</span>
+          <input class="contact-form__input" type="tel" name="phone" placeholder="Ingresa tu telefono" maxlength="20" inputmode="numeric" />
         </label>
         <label class="contact-form__field">
           <span class="sr-only">Ciudad</span>
-          <input class="contact-form__input" type="text" name="city" placeholder="Input your city" maxlength="40" />
+          <input class="contact-form__input" type="text" name="city" placeholder="Ingresa tu ciudad" maxlength="40" />
         </label>
         <label class="contact-form__field">
-          <span class="sr-only">Dirección</span>
-          <input class="contact-form__input" type="text" name="address" placeholder="Input your address" maxlength="80" />
+          <span class="sr-only">Direccion</span>
+          <input class="contact-form__input" type="text" name="address" placeholder="Ingresa tu direccion" maxlength="80" />
         </label>
 
         <fieldset class="contact-form__gender">
-          <legend class="sr-only">Selecciona el género</legend>
+          <legend class="sr-only">Selecciona el genero</legend>
           <label class="contact-form__option">
             <input class="contact-form__radio" type="radio" name="gender" value="female" />
             <span class="contact-form__indicator"></span>
-            <span class="contact-form__option-label">Female</span>
+            <span class="contact-form__option-label">Femenino</span>
           </label>
           <label class="contact-form__option">
             <input class="contact-form__radio" type="radio" name="gender" value="male" />
             <span class="contact-form__indicator"></span>
-            <span class="contact-form__option-label">Male</span>
+            <span class="contact-form__option-label">Masculino</span>
           </label>
         </fieldset>
 
-        <button class="contact-form__button" id="submitButton" type="submit">ADD</button>
+        <button class="contact-form__button" id="submitButton" type="submit">Agregar</button>
         <p class="contact-form__feedback" id="formFeedback" aria-live="polite"></p>
       </form>
     </section>
@@ -70,7 +70,7 @@
       </div>
 
       <ul class="contact-list" id="contactList"></ul>
-      <p class="empty-state" id="emptyState">No hay contactos guardados todavía.</p>
+      <p class="empty-state" id="emptyState">No hay contactos guardados todavia.</p>
     </section>
   </main>
 
@@ -78,27 +78,27 @@
     <div class="modal__content">
       <div class="modal__header">
         <h2 class="modal__title">Editar contacto</h2>
-        <button class="modal__close" id="closeEditModal" type="button" aria-label="Cerrar">×</button>
+        <button class="modal__close" id="closeEditModal" type="button" aria-label="Cerrar">x</button>
       </div>
 
       <form class="contact-form contact-form--modal" id="editForm" novalidate>
-        <label class="contact-form__field"><span class="sr-only">Nombre</span><input class="contact-form__input" type="text" name="name" placeholder="Input your name" maxlength="40" /></label>
-        <label class="contact-form__field"><span class="sr-only">Apellido</span><input class="contact-form__input" type="text" name="lastname" placeholder="Input your lastname" maxlength="40" /></label>
-        <label class="contact-form__field"><span class="sr-only">Teléfono</span><input class="contact-form__input" type="tel" name="phone" placeholder="Input your phone" maxlength="20" inputmode="numeric" /></label>
-        <label class="contact-form__field"><span class="sr-only">Ciudad</span><input class="contact-form__input" type="text" name="city" placeholder="Input your city" maxlength="40" /></label>
-        <label class="contact-form__field"><span class="sr-only">Dirección</span><input class="contact-form__input" type="text" name="address" placeholder="Input your address" maxlength="80" /></label>
+        <label class="contact-form__field"><span class="sr-only">Nombre</span><input class="contact-form__input" type="text" name="name" placeholder="Ingresa tu nombre" maxlength="40" /></label>
+        <label class="contact-form__field"><span class="sr-only">Apellido</span><input class="contact-form__input" type="text" name="lastname" placeholder="Ingresa tu apellido" maxlength="40" /></label>
+        <label class="contact-form__field"><span class="sr-only">Telefono</span><input class="contact-form__input" type="tel" name="phone" placeholder="Ingresa tu telefono" maxlength="20" inputmode="numeric" /></label>
+        <label class="contact-form__field"><span class="sr-only">Ciudad</span><input class="contact-form__input" type="text" name="city" placeholder="Ingresa tu ciudad" maxlength="40" /></label>
+        <label class="contact-form__field"><span class="sr-only">Direccion</span><input class="contact-form__input" type="text" name="address" placeholder="Ingresa tu direccion" maxlength="80" /></label>
 
         <fieldset class="contact-form__gender">
-          <legend class="sr-only">Selecciona el género</legend>
+          <legend class="sr-only">Selecciona el genero</legend>
           <label class="contact-form__option">
             <input class="contact-form__radio" type="radio" name="gender" value="female" />
             <span class="contact-form__indicator"></span>
-            <span class="contact-form__option-label">Female</span>
+            <span class="contact-form__option-label">Femenino</span>
           </label>
           <label class="contact-form__option">
             <input class="contact-form__radio" type="radio" name="gender" value="male" />
             <span class="contact-form__indicator"></span>
-            <span class="contact-form__option-label">Male</span>
+            <span class="contact-form__option-label">Masculino</span>
           </label>
         </fieldset>
 

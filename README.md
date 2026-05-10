@@ -1,4 +1,4 @@
-# Contact List CRUD - Express + SQLite
+# Lista de Contactos CRUD - Express + SQLite
 
 Proyecto de lista de contactos con frontend en HTML, CSS y JavaScript vanilla, conectado a una API REST creada con Express y una base de datos SQLite.
 
